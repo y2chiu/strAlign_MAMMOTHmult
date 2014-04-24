@@ -28,11 +28,19 @@
     {
         $p = $lst[$i];
         $m = array_pop($mat);
-        $m = preg_split('/\s+/', trim($m));
+
+        //  1:    1.000  -0.001
+        //     1234567812345678     
+        //012345678901234567890
+        $t = substr($m, 0, 5);
+        $m = substr($m, 5);
+        $m = str_split($m, 8);
+        $m = array_map('doubleval', $m);
+        array_unshift($m, $t);
 
         $TR_MAT[$i] = array($p, $m);
     }
-
+    
     printf("# start to translate PDB files\n");
 
     for($i=0,$n=count($TR_MAT);$i<$n;$i++)
