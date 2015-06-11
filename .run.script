@@ -1,0 +1,7 @@
+find /home/y2chiu/project/strAlign_MAMMOTHmult/test/IRAK4 -type f > /home/y2chiu/project/strAlign_MAMMOTHmult/test/IRAK4_out/list.IRAK4.txt;
+sed -i '1i MAMMOTH' /home/y2chiu/project/strAlign_MAMMOTHmult/test/IRAK4_out/list.IRAK4.txt;
+cd /home/y2chiu/project/strAlign_MAMMOTHmult/test/IRAK4_out;
+echo "# start MAMMOTHmult alignment";
+/home/y2chiu/project/strAlign_MAMMOTHmult/mmult_45 /home/y2chiu/project/strAlign_MAMMOTHmult/test/IRAK4_out/list.IRAK4.txt -rot -n 45;
+echo "# finish MAMMOTHmult alignment";
+cd -;

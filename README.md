@@ -8,14 +8,13 @@ PDB files from MAMMOTHmult structual alignment results
   >  
   >[MAMMOTHmult_parameters]  
   >MMULT_DIR = './'  
-  >MMULT_PROG = 'mmult'  
+  >MMULT_PROG = 'mmult_45'  
 
 2. Prepare the PDB files
 
 3. Run COMMAND
   ```
-  php prog/1_runMMULT.php --di example/32_kinase_cav/ --do example/ > todo.sh
-  sh todo.sh
-  php prog/2_mat2PDB.php -l example/list.32_kinase_cav.txt -m example/list.32_kinase_cav.txt-FINAL.rot --do example/32_kinase_trpdb
+  php prog/1_runMMULT.php --di example/IRAK4/ --do example/IRAK4_out 
+  php prog/2_mat2PDB.php -l example/IRAK4_out/list.IRAK4.txt -m example/list.IRAK4.txt-FINAL.rot --do example/IRAK4_trpdb
   ```
 

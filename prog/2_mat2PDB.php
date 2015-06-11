@@ -62,7 +62,7 @@
         $fn_in  = $p;
         $fn_out = sprintf('%s/%s', $DIR_OUT, basename($p));
         
-        printf("# [%2d/%2d] %s\n", $i+1, $n, basename($p));
+        printf("# [%2d/%2d] %s     \r", $i+1, $n, basename($p));
 
         trans_structure($fn_in, $fn_out, $trmat);
     }

@@ -3,7 +3,7 @@
     include($DIR_PROG.'/libcom.php');
     ini_set('memory_limit', '2048M');
 
-    $opt= getOption('l:', array('di:','do:'));
+    $opt= getOption('l:x:', array('di:','do:','cmd'));
     foreach(array('di','do') as $k)
     {
         if(!isset($opt[$k]))
@@ -14,6 +14,8 @@
 
     $DIR_IN  = createPath($opt['di']);
     $DIR_OUT = createPath($opt['do']);
+    $SHOW_CMD = (isset($opt['x']) || isset($opt['cmd'])) ? true : false;
+    
     $FN_LIST = sprintf('%s/list.%s.txt', $DIR_OUT, basename($DIR_IN));
 
     $cmd = array();
@@ -22,14 +24,23 @@
    
     $mm_dir = getRealPath($DEF_PARAM['MMULT_DIR']);
     $cmd[] = sprintf("cd %s;\n", $DIR_OUT);
-    $cmd[] = sprintf('echo "# start MAMMOTHmult alignment";');
+    $cmd[] = sprintf('echo "# start MAMMOTHmult alignment";'."\n");
     $cmd[] = sprintf("%s/%s %s -rot -n %d;\n", $mm_dir, $DEF_PARAM['MMULT_PROG'], $FN_LIST, $DEF_PARAM['N_STR']);
 
-    $cmd[] = sprintf('echo "# finish MAMMOTHmult alignment";');
+    $cmd[] = sprintf('echo "# finish MAMMOTHmult alignment";'."\n");
     $cmd[] = sprintf("cd -;\n");
 
-    foreach($cmd as $c)
-        echo $c;
+    if($SHOW_CMD)
+    {
+        echo join('',$cmd);
+    }
+    else
+    {
+        $fout = '.run.script';
+        file_put_contents($fout,$cmd);
+        //system("sh $fout"); // it cant show all raw outputs
+        passthru("sh $fout"); 
+    }
 
     exit;
 
